@@ -11,4 +11,7 @@ extension Notification.Name {
     static func surveyPost() -> Self {
         return Notification.Name("surveyPost")
     }
+    static func locationPost() -> Self {
+        return Notification.Name("notificationPost")
+    }
 }

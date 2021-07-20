@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB45AC522695CD6100D7AC61 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45AC512695CD6100D7AC61 /* String+Extension.swift */; };
+		DB45AC522695CD6100D7AC61 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45AC512695CD6100D7AC61 /* Int+Extension.swift */; };
+		DB7ACAEF26A54F0900D048F8 /* DispatchQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACAEE26A54F0900D048F8 /* DispatchQueue+Extension.swift */; };
+		DB7ACB1126A58EF300D048F8 /* LocationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACB1026A58EF300D048F8 /* LocationButtonView.swift */; };
+		DB7ACB1326A59D9100D048F8 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACB1226A59D9100D048F8 /* LocationListView.swift */; };
+		DB7ACB1526A59E3100D048F8 /* LocationListLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACB1426A59E3100D048F8 /* LocationListLoader.swift */; };
+		DB7ACB1826A5BE0A00D048F8 /* PopulationLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACB1726A5BE0A00D048F8 /* PopulationLoader.swift */; };
 		DBB8D679269484D70000A088 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB8D678269484D70000A088 /* AppDelegate.swift */; };
 		DBB8D67B269484D70000A088 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB8D67A269484D70000A088 /* SceneDelegate.swift */; };
 		DBB8D67D269484D70000A088 /* SellerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB8D67C269484D70000A088 /* SellerListViewController.swift */; };
@@ -21,19 +26,24 @@
 		DBB8D69B26949A730000A088 /* SellerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB8D69A26949A730000A088 /* SellerModel.swift */; };
 		DBB8D69E26949AA60000A088 /* MockSeller.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB8D69D26949AA60000A088 /* MockSeller.swift */; };
 		DBC8830F269DB765000C24FD /* SellerInfoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8830E269DB765000C24FD /* SellerInfoLoader.swift */; };
-		DBDE484226A178F900CF5BEB /* ConvertIdentifierToContraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484126A178F900CF5BEB /* ConvertIdentifierToContraint.swift */; };
-		DBDE484626A18AB200CF5BEB /* SurveyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBDE484526A18AB200CF5BEB /* SurveyView.xib */; };
-		DBDE484826A18DA400CF5BEB /* SurveyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484726A18DA400CF5BEB /* SurveyView.swift */; };
+		DBDE484226A178F900CF5BEB /* SellerViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484126A178F900CF5BEB /* SellerViewType.swift */; };
+		DBDE484626A18AB200CF5BEB /* TopAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBDE484526A18AB200CF5BEB /* TopAlertView.xib */; };
+		DBDE484826A18DA400CF5BEB /* TopAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484726A18DA400CF5BEB /* TopAlertView.swift */; };
 		DBDE484A26A18EDF00CF5BEB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484926A18EDF00CF5BEB /* UIView+Extension.swift */; };
 		DBDE484D26A194D700CF5BEB /* SurveyLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484C26A194D700CF5BEB /* SurveyLoader.swift */; };
 		DBDE484F26A1959100CF5BEB /* MockSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE484E26A1959100CF5BEB /* MockSurvey.swift */; };
-		DBDE485126A196B700CF5BEB /* SurveyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE485026A196B700CF5BEB /* SurveyModel.swift */; };
+		DBDE485126A196B700CF5BEB /* TopAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE485026A196B700CF5BEB /* TopAlertModel.swift */; };
 		DBDE485326A19B2500CF5BEB /* Notification.Name+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE485226A19B2500CF5BEB /* Notification.Name+Extension.swift */; };
-		DBDE485526A19D2D00CF5BEB /* SurveyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE485426A19D2D00CF5BEB /* SurveyViewCell.swift */; };
+		DBDE485526A19D2D00CF5BEB /* TopAlertTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDE485426A19D2D00CF5BEB /* TopAlertTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DB45AC512695CD6100D7AC61 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		DB45AC512695CD6100D7AC61 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
+		DB7ACAEE26A54F0900D048F8 /* DispatchQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extension.swift"; sourceTree = "<group>"; };
+		DB7ACB1026A58EF300D048F8 /* LocationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButtonView.swift; sourceTree = "<group>"; };
+		DB7ACB1226A59D9100D048F8 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
+		DB7ACB1426A59E3100D048F8 /* LocationListLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListLoader.swift; sourceTree = "<group>"; };
+		DB7ACB1726A5BE0A00D048F8 /* PopulationLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopulationLoader.swift; sourceTree = "<group>"; };
 		DBB8D675269484D70000A088 /* CarrotSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarrotSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBB8D678269484D70000A088 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBB8D67A269484D70000A088 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,15 +59,15 @@
 		DBB8D69A26949A730000A088 /* SellerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerModel.swift; sourceTree = "<group>"; };
 		DBB8D69D26949AA60000A088 /* MockSeller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSeller.swift; sourceTree = "<group>"; };
 		DBC8830E269DB765000C24FD /* SellerInfoLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerInfoLoader.swift; sourceTree = "<group>"; };
-		DBDE484126A178F900CF5BEB /* ConvertIdentifierToContraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertIdentifierToContraint.swift; sourceTree = "<group>"; };
-		DBDE484526A18AB200CF5BEB /* SurveyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SurveyView.xib; sourceTree = "<group>"; };
-		DBDE484726A18DA400CF5BEB /* SurveyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyView.swift; sourceTree = "<group>"; };
+		DBDE484126A178F900CF5BEB /* SellerViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerViewType.swift; sourceTree = "<group>"; };
+		DBDE484526A18AB200CF5BEB /* TopAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopAlertView.xib; sourceTree = "<group>"; };
+		DBDE484726A18DA400CF5BEB /* TopAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlertView.swift; sourceTree = "<group>"; };
 		DBDE484926A18EDF00CF5BEB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		DBDE484C26A194D700CF5BEB /* SurveyLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyLoader.swift; sourceTree = "<group>"; };
 		DBDE484E26A1959100CF5BEB /* MockSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSurvey.swift; sourceTree = "<group>"; };
-		DBDE485026A196B700CF5BEB /* SurveyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyModel.swift; sourceTree = "<group>"; };
+		DBDE485026A196B700CF5BEB /* TopAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlertModel.swift; sourceTree = "<group>"; };
 		DBDE485226A19B2500CF5BEB /* Notification.Name+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+Extension.swift"; sourceTree = "<group>"; };
-		DBDE485426A19D2D00CF5BEB /* SurveyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyViewCell.swift; sourceTree = "<group>"; };
+		DBDE485426A19D2D00CF5BEB /* TopAlertTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlertTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +84,10 @@
 		DB45AC502695CD5800D7AC61 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				DB45AC512695CD6100D7AC61 /* String+Extension.swift */,
+				DB45AC512695CD6100D7AC61 /* Int+Extension.swift */,
 				DBDE484926A18EDF00CF5BEB /* UIView+Extension.swift */,
 				DBDE485226A19B2500CF5BEB /* Notification.Name+Extension.swift */,
+				DB7ACAEE26A54F0900D048F8 /* DispatchQueue+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -101,8 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				DBB8D69C26949A900000A088 /* Util */,
-				DBC8830D269DB75E000C24FD /* Loader */,
 				DB45AC502695CD5800D7AC61 /* Extension */,
+				DBC8830D269DB75E000C24FD /* Loader */,
 				DBB8D69926949A6D0000A088 /* Model */,
 				DBB8D68C2694873A0000A088 /* View */,
 				DBB8D697269499950000A088 /* ViewController */,
@@ -118,13 +129,15 @@
 		DBB8D68C2694873A0000A088 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBDE484526A18AB200CF5BEB /* SurveyView.xib */,
-				DBDE484726A18DA400CF5BEB /* SurveyView.swift */,
+				DBDE484526A18AB200CF5BEB /* TopAlertView.xib */,
+				DBDE484726A18DA400CF5BEB /* TopAlertView.swift */,
 				DBB8D68D269487790000A088 /* SellerView.xib */,
 				DBB8D691269493B10000A088 /* SellerView.swift */,
 				DBB8D68F26948CC40000A088 /* StateLabel.swift */,
 				DBB8D6932694951A0000A088 /* SellerTableViewCell.swift */,
-				DBDE485426A19D2D00CF5BEB /* SurveyViewCell.swift */,
+				DBDE485426A19D2D00CF5BEB /* TopAlertTableViewCell.swift */,
+				DB7ACB1026A58EF300D048F8 /* LocationButtonView.swift */,
+				DB7ACB1226A59D9100D048F8 /* LocationListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				DBB8D69A26949A730000A088 /* SellerModel.swift */,
-				DBDE485026A196B700CF5BEB /* SurveyModel.swift */,
+				DBDE485026A196B700CF5BEB /* TopAlertModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,7 +173,7 @@
 			children = (
 				DBB8D69D26949AA60000A088 /* MockSeller.swift */,
 				DBDE484E26A1959100CF5BEB /* MockSurvey.swift */,
-				DBDE484126A178F900CF5BEB /* ConvertIdentifierToContraint.swift */,
+				DBDE484126A178F900CF5BEB /* SellerViewType.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -169,7 +182,9 @@
 			isa = PBXGroup;
 			children = (
 				DBC8830E269DB765000C24FD /* SellerInfoLoader.swift */,
+				DB7ACB1426A59E3100D048F8 /* LocationListLoader.swift */,
 				DBDE484C26A194D700CF5BEB /* SurveyLoader.swift */,
+				DB7ACB1726A5BE0A00D048F8 /* PopulationLoader.swift */,
 			);
 			path = Loader;
 			sourceTree = "<group>";
@@ -233,7 +248,7 @@
 			files = (
 				DBB8D685269484D80000A088 /* LaunchScreen.storyboard in Resources */,
 				DBB8D682269484D80000A088 /* Assets.xcassets in Resources */,
-				DBDE484626A18AB200CF5BEB /* SurveyView.xib in Resources */,
+				DBDE484626A18AB200CF5BEB /* TopAlertView.xib in Resources */,
 				DBB8D696269495F20000A088 /* HomeTab.storyboard in Resources */,
 				DBB8D68E269487790000A088 /* SellerView.xib in Resources */,
 			);
@@ -247,21 +262,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBDE485326A19B2500CF5BEB /* Notification.Name+Extension.swift in Sources */,
+				DB7ACAEF26A54F0900D048F8 /* DispatchQueue+Extension.swift in Sources */,
 				DBB8D6942694951A0000A088 /* SellerTableViewCell.swift in Sources */,
 				DBDE484A26A18EDF00CF5BEB /* UIView+Extension.swift in Sources */,
-				DB45AC522695CD6100D7AC61 /* String+Extension.swift in Sources */,
+				DB45AC522695CD6100D7AC61 /* Int+Extension.swift in Sources */,
 				DBC8830F269DB765000C24FD /* SellerInfoLoader.swift in Sources */,
 				DBB8D67D269484D70000A088 /* SellerListViewController.swift in Sources */,
+				DB7ACB1126A58EF300D048F8 /* LocationButtonView.swift in Sources */,
 				DBB8D692269493B10000A088 /* SellerView.swift in Sources */,
 				DBDE484D26A194D700CF5BEB /* SurveyLoader.swift in Sources */,
 				DBB8D679269484D70000A088 /* AppDelegate.swift in Sources */,
 				DBDE484F26A1959100CF5BEB /* MockSurvey.swift in Sources */,
-				DBDE485526A19D2D00CF5BEB /* SurveyViewCell.swift in Sources */,
+				DBDE485526A19D2D00CF5BEB /* TopAlertTableViewCell.swift in Sources */,
 				DBB8D69E26949AA60000A088 /* MockSeller.swift in Sources */,
-				DBDE484226A178F900CF5BEB /* ConvertIdentifierToContraint.swift in Sources */,
-				DBDE485126A196B700CF5BEB /* SurveyModel.swift in Sources */,
-				DBDE484826A18DA400CF5BEB /* SurveyView.swift in Sources */,
+				DB7ACB1826A5BE0A00D048F8 /* PopulationLoader.swift in Sources */,
+				DBDE484226A178F900CF5BEB /* SellerViewType.swift in Sources */,
+				DB7ACB1526A59E3100D048F8 /* LocationListLoader.swift in Sources */,
+				DBDE485126A196B700CF5BEB /* TopAlertModel.swift in Sources */,
+				DBDE484826A18DA400CF5BEB /* TopAlertView.swift in Sources */,
 				DBB8D69026948CC40000A088 /* StateLabel.swift in Sources */,
+				DB7ACB1326A59D9100D048F8 /* LocationListView.swift in Sources */,
 				DBB8D67B269484D70000A088 /* SceneDelegate.swift in Sources */,
 				DBB8D69B26949A730000A088 /* SellerModel.swift in Sources */,
 			);

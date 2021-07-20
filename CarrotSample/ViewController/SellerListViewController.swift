@@ -8,34 +8,16 @@
 import UIKit
 
 class SellerListViewController: UIViewController {
-    var tableView: UITableView = UITableView()
-    var divideView: UIView = UIView()
+    let divideView: UIView = UIView()
+    let tableView: UITableView = UITableView()
+    lazy var locationButtonView: LocationButtonView = LocationButtonView()
     
     var sellerType: SellerViewType
-    let surveyViewIdentifier = "surveyViewCell"
-    var isSurveyRequest: Bool = true {
-        didSet {
-            DispatchQueue.main.async { [self] in
-                if isSurveyRequest {
-//                    tableView.reloadData()
-//                    if tableView.cellForRow(at: IndexPath(row: 0, section: 0)) == nil  {
-//                        tableView.performBatchUpdates {
-//                            tableView.insertRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
-//                        }
-//                    }
-                } else {
-                    if let _ = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) {
-                        tableView.performBatchUpdates {
-                                tableView.deleteRows(at: [IndexPath(item: 0, section: 0)], with: .automatic)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
+    let topAlertViewIdentifier = "topAlertTableViewCell"
+    var isNeededTopAlertView: Bool = true
+    var topAlertList = [TopAlertModel]()
     var isLoading = false
-    var sellerInfoLoaders: [SellerInfoLoader] = (0..<20).map{ _ in SellerInfoLoader()}
+    var sellerInfoLoaders: [SellerInfoLoader] = (0..<10).map{ _ in SellerInfoLoader()}
     
     //MARK: - init
     init(type: SellerViewType) {
@@ -52,25 +34,27 @@ class SellerListViewController: UIViewController {
     // MARK: - method
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpSurveyRequest()
         setUpDivideView()
         setUpTableView()
         setUpNavigationBar()
         setUpRefreshControl()
+        setUpSurveyRequest()
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveSurveyPost(notification:)), name: .surveyPost(), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationPost(notification:)), name: .locationPost(), object: nil)
         
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now()+5) {
-//            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
-//            self.tableView.reloadSections(IndexSet(integer: 1), with: .none)
-//            print("-")
-//        }
     }
     
     func setUpSurveyRequest() {
         switch sellerType {
-        case .notificationCell: isSurveyRequest = false
-        case .sellerCell: isSurveyRequest = true
+        case .notificationCell:
+            isNeededTopAlertView = false
+        case .sellerCell:
+            isNeededTopAlertView = true
+            fetchSurvey {
+                DispatchQueue.mainAsync {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -96,17 +80,16 @@ class SellerListViewController: UIViewController {
              tableView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
              tableView.topAnchor.constraint(equalTo: divideView.bottomAnchor),
              tableView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor)])
-
+        
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 300
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.dataSource = self
         tableView.delegate = self
         tableView.prefetchDataSource = self
-        tableView.reloadData()
         tableView.backgroundColor = .white
         tableView.allowsSelection = false
         tableView.register(SellerTableViewCell.self, forCellReuseIdentifier: sellerType.identifier)
-        tableView.register(SurveyViewCell.self, forCellReuseIdentifier: surveyViewIdentifier)
+        tableView.register(TopAlertTableViewCell.self, forCellReuseIdentifier: topAlertViewIdentifier)
     }
     
     func setUpRefreshControl() {
@@ -127,13 +110,10 @@ class SellerListViewController: UIViewController {
                                                      target: self,
                                                      action: #selector(clickNotificationButton))
             notificationButton.tintColor = .black
-            let location = UIBarButtonItem(customView: locView)
-            location.action = #selector(clickLocation)
-            let tapGetsure = UITapGestureRecognizer(target: self, action: #selector(showLocationList(sender:)))
-            locView.addGestureRecognizer(tapGetsure)
-            locView.isUserInteractionEnabled = true
+            let location = UIBarButtonItem(customView: locationButtonView)
             navigationItem.rightBarButtonItems = [notificationButton]
             navigationItem.leftBarButtonItems = [location]
+
         case .notificationCell:
             let trashButton = UIBarButtonItem(barButtonSystemItem: .trash,
                                               target: self, action: nil)
@@ -152,107 +132,70 @@ class SellerListViewController: UIViewController {
     
     //MARK: - Action
     @objc func clickNotificationButton() {
-        let notificationViewController = SellerListViewController(type: .notificationCell)
-        navigationController?.pushViewController(notificationViewController, animated: true)
+                let notificationViewController = SellerListViewController(type: .notificationCell)
+                navigationController?.pushViewController(notificationViewController, animated: true)
     }
     @objc func clickBackButton() {
         navigationController?.popViewController(animated: true)
     }
-    
-    @objc func clickSearch() {
-        
-    }
-    
+
     @objc func handleRefreshControl() {
-        setUpSurveyRequest()
-        sellerInfoLoaders = (0..<20).map{ _ in SellerInfoLoader()}
-        tableView.reloadData()
-        tableView.refreshControl?.endRefreshing()
-        
+        refreshAllData()
     }
     
+    func refreshAllData() {
+        refreshSllerInfoLoaders()
+        setUpSurveyRequest()
+        tableView.refreshControl?.endRefreshing()
+    }
     
-    var listView: UIStackView!
-    @objc func showLocationList(sender: UITapGestureRecognizer) {
-        guard let senderView = sender.view else { return }
-        guard let frame = senderView.superview?.convert(senderView.frame, to:nil) else { return }
-        guard let naviView = navigationController?.view else { return }
-        
-        let alphaView = UIView(frame: naviView.frame )
-        naviView.addSubview(alphaView)
-        alphaView.backgroundColor = .black
-        alphaView.alpha = 0
-        alphaView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(removeAlphaView(sender:))))
-        
-        let x = frame.minX
-        let y = frame.maxY
-        listView = UIStackView()
-        listView.axis = .vertical
-        listView.backgroundColor = .white
-        listView.distribution = .fill
-        listView.setRoundCorner(to: 5.0)
-        listView.clipsToBounds = true
-        let locList = ["   산본동","   아현동","   내 동네 설정하기"]
-        for i in 0..<locList.count {
-            let label = UILabel()
-            label.text = locList[i]
-            label.textColor = i == 0 ? .black : .darkGray
-            label.font.withSize(14.0)
-            let separator = UIView()
-            separator.backgroundColor = .lightGray
-            listView.addArrangedSubview(label)
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            label.backgroundColor = .white
-            if i < 2 {
-                listView.addArrangedSubview(separator)
-                separator.setContentHuggingPriority(.required, for: .vertical)
-                separator.translatesAutoresizingMaskIntoConstraints = false
-                separator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+    func refreshSllerInfoLoaders() {
+        sellerInfoLoaders = (0..<10).map{ _ in SellerInfoLoader()}
+    }
+    
+    func fetchSurvey(_ completion: @escaping () -> Void ) {
+        SurveyLoader.load { result in
+            switch result {
+            case .success(let model) :
+                self.topAlertList = [model]
+                completion()
+            case .failure(let error): print(error)
             }
         }
-        
-        
-        naviView.addSubview(listView)
-        listView.translatesAutoresizingMaskIntoConstraints = false
-        listView.topAnchor.constraint(equalTo: naviView.topAnchor, constant: y).isActive = true
-        listView.leadingAnchor.constraint(equalTo: naviView.leadingAnchor,constant: x).isActive = true
-        listView.widthAnchor.constraint(equalToConstant: view.frame.width/2).isActive = true
-        
-        listView.setRoundCorner(to: 7.0)
-        
-        listView.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
-        UIView.animate(withDuration: 0.5) { [self] in
-            alphaView.alpha = 0.5
-            listView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+    }
+    
+    func fetchLocationCertification(by name: String ) {
+        PopulationLoader.load { population in
+            let surveyModel = createRandomLocationCertification(name: name, with: population)
+            self.topAlertList = [surveyModel]
+            self.refreshSllerInfoLoaders()
+            DispatchQueue.mainAsync {
+                self.tableView.reloadData()
+            }
         }
     }
     
-    @objc func removeAlphaView(sender: UITapGestureRecognizer ) {
-        UIView.animate(withDuration: 0.5) { [self] in
-            navigationController?.view.layoutIfNeeded()
-            listView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-            sender.view?.alpha = 0.0
-        } completion: { [self] compelte  in
-            sender.view?.removeFromSuperview()
-            listView.removeFromSuperview()
+    @objc func didReceiveLocationPost(notification: Notification) {
+        guard let location = notification.userInfo?[Notification.Name.locationPost()] as? String else { return }
+        if location != "산본동" {
+            fetchLocationCertification(by: location)
+        } else {
+            fetchSurvey {
+                self.refreshSllerInfoLoaders()
+                DispatchQueue.mainAsync {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
-    
-    @objc func clickLocation() {
-        UIView.animate(withDuration: 0.5) { [self] in
-            locView.transform = CGAffineTransform(rotationAngle: .pi)
-        }
-    }
-    let locView: UILabel = {
-        let label = UILabel()
-        label.text = "산본동"
-        label.textColor = .black
-        return  label
-    }()
     
     @objc func didReceiveSurveyPost(notification: Notification) {
-        isSurveyRequest = false
+        DispatchQueue.mainAsync { [self] in 
+            topAlertList.removeAll()
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            tableView.endUpdates()
+        }
     }
 }
 
@@ -265,8 +208,29 @@ extension SellerListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return isSurveyRequest ? 1 : 0
+        case 0: return isNeededTopAlertView ? topAlertList.count : 0
         default: return sellerInfoLoaders.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: topAlertViewIdentifier,for: indexPath) as? TopAlertTableViewCell else { return UITableViewCell() }
+            cell.updateTopAlertView(by: topAlertList[indexPath.row])
+            return cell
+        default:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: sellerType.identifier, for: indexPath) as? SellerTableViewCell else { return UITableViewCell() }
+            cell.indexPath = indexPath
+            let sellerLoader = sellerInfoLoaders[indexPath.row]
+            
+            if let seller = sellerLoader.sellerInfo {
+                //
+                DispatchQueue.mainAsync {
+                    cell.updateSellerView(by: seller)
+                }
+            }
+            return cell
         }
     }
     
@@ -276,58 +240,37 @@ extension SellerListViewController: UITableViewDataSource {
      클로저에 이미지를 로드완료하면 셀에 업데이트하는것을 저장하고,
      만약 로드안하고있다면 로드하고,
      */
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: surveyViewIdentifier,for: indexPath) as? SurveyViewCell else { return UITableViewCell() }
-//            cell.titleLabel.text = "asdfansjdlfalkjsbdflkjabskjdbfaljkbsdflkjabskjfbakbsldkjfblaksdbfbakjbsjdf"
-            if isSurveyRequest {
-                SurveyLoader().load { result in
-                    switch result {
-                    case .success(let model):
-                        
-                        DispatchQueue.main.async {
-                            cell.updateSurveyView(with: model)
-                            
-                            }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }
-            return cell
+            guard let cell = cell as? TopAlertTableViewCell else { return  }
+            cell.updateTopAlertView(by: topAlertList[indexPath.row])
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: sellerType.identifier, for: indexPath) as? SellerTableViewCell else { return UITableViewCell() }
-            
+            guard let cell = cell as? SellerTableViewCell else { return }
             cell.indexPath = indexPath
             let sellerLoader = sellerInfoLoaders[indexPath.row]
-            
             if let seller = sellerLoader.sellerInfo {
-                DispatchQueue.main.async {
-                    cell.updateSellerView(with: seller)
+                DispatchQueue.mainAsync {
+                    cell.updateSellerView(by: seller)
                 }
             } else {
                 sellerLoader.completion = {  seller in
-                    DispatchQueue.main.async {
-                        if cell.indexPath == indexPath {
-                            cell.updateSellerView(with: seller)
+                    if cell.indexPath == indexPath {
+                        DispatchQueue.mainAsync {
+                            cell.updateSellerView(by: seller)
+                            UIView.setAnimationsEnabled(false)
+                            tableView.beginUpdates()
+                            tableView.endUpdates()
+                            UIView.setAnimationsEnabled(true)
                         }
-                        sellerLoader.completion = nil
                     }
                 }
-                if sellerLoader.dataTask == nil {
+                if sellerLoader.dataTask?.state != .running {
                     sellerLoader.load()
-                } else {
-                    if sellerLoader.isError {
-                        sellerLoader.load()
-                    }
                 }
             }
-            return cell
         }
     }
-    
-
 }
 
 //MARK: - TableView Prefetch 
@@ -335,14 +278,10 @@ extension SellerListViewController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach {
-            if $0.section == 1 {
-                let imageLoader = sellerInfoLoaders[$0.row]
-                
-                if let dataTask = imageLoader.dataTask {
-                    dataTask.resume()
-                } else {
-                    imageLoader.load()
-                }
+            let imageLoader = sellerInfoLoaders[$0.row]
+            if $0.section == 1, imageLoader.dataTask?.state != .running {
+                imageLoader.indexPath = $0
+                imageLoader.load()
             }
         }
     }
@@ -350,13 +289,11 @@ extension SellerListViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach {
             if $0.section == 1 {
+                
                 let imageLoader = sellerInfoLoaders[$0.row]
                 imageLoader.completion = nil
-                if let dataTask = imageLoader.dataTask {
-                    dataTask.cancel()
-                }
+                imageLoader.dataTask?.cancel()
             }
-            
         }
     }
 }
@@ -370,14 +307,12 @@ extension SellerListViewController: UITableViewDelegate {
         let offset = scrollView.contentOffset.y
         if !isLoading, frame.height*1.2 >= contentSize.height - offset {
             isLoading = true
-            
             tableView.performBatchUpdates {
                 let count = sellerInfoLoaders.count
-                let indexPaths: [IndexPath] = (0..<20).map{
+                let indexPaths: [IndexPath] = (0..<10).map{
                     sellerInfoLoaders.append(SellerInfoLoader())
                     return IndexPath(row: count+$0, section: 1)
                 }
-                
                 tableView.insertRows(at: indexPaths, with: .none)
             } completion: { _ in
                 self.isLoading = false

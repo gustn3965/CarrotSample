@@ -11,9 +11,10 @@ enum SurveyLoaderError: Error {
     case invalid
 }
 
-class SurveyLoader {
+/// 최상단에 나타나는 설문조사 받아오는 객체
+struct SurveyLoader {
     
-    func load(completion: @escaping (Result<SurveyModel, SurveyLoaderError>) -> Void ) {
+    static func load(completion: @escaping (Result<TopAlertModel, SurveyLoaderError>) -> Void ) {
         DispatchQueue.global().async {
             let survey = createRandomSurvey()
             completion(.success(survey))
@@ -21,9 +22,9 @@ class SurveyLoader {
     }
 }
 
-class SurveyPoster {
-    
-    func post() {
+struct SurveyPoster {
+
+    static func post() {
         DispatchQueue.global().async {
             NotificationCenter.default.post(name: .surveyPost(), object: nil, userInfo: [Notification.Name.surveyPost(): true])
         }

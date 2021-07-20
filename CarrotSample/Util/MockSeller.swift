@@ -38,7 +38,7 @@ private func createRandomLocation() -> String {
     return str
 }
 
-private func createRandomNumber(with range: Range<Int>) -> Int {
+func createRandomNumber(with range: Range<Int>) -> Int {
     return (range).randomElement()!
 }
 

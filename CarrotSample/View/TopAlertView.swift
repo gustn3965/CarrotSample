@@ -8,10 +8,11 @@
 import UIKit
 
 
-class SurveyView: UIView {
+class TopAlertView: UIView {
     
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var agreeButton: UIButton!
     var titleLabelHeightConstraint: NSLayoutConstraint!
@@ -28,26 +29,19 @@ class SurveyView: UIView {
         setUpView()
     }
     
-    
-    
     private func loadView() {
-        let bundle = Bundle(for: SurveyView.self)
-        let nib = UINib(nibName: "SurveyView", bundle: bundle)
+        let bundle = Bundle(for: TopAlertView.self)
+        let nib = UINib(nibName: "TopAlertView", bundle: bundle)
         guard let view = nib.instantiate(withOwner: self).first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(
-        [view.leadingAnchor.constraint(equalTo: leadingAnchor),
-         view.trailingAnchor.constraint(equalTo: trailingAnchor),
-         view.topAnchor.constraint(equalTo: topAnchor),
-         view.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
     
     private func setUpView() {
         setUpButtonView()
         setUpStackView()
         titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height)
+        stackView.backgroundColor = UIColor(named: "customWhiteGray")
     }
     
     private func setUpButtonView() {
@@ -66,25 +60,25 @@ class SurveyView: UIView {
         stackView.setRoundCorner(to: 7.0)
     }
     
-    func updateSurveyView(with model: SurveyModel) {
+    func updateView(by model: TopAlertModel) {
         isFinsihLoad = true
         
+        DispatchQueue.mainAsync { [self] in
             agreeButton.setTitle(model.agree, for: .normal)
             cancelButton.setTitle(model.cancel, for: .normal)
-        titleLabel.text = model.title
-        
-//        titleLabelHeightConstraint = titleLabel.heightAnchor.constraint(equalToConstant: titleLabel.intrinsicContentSize.height)
-//        titleLabelHeightConstraint.isActive = true
-//        print(titleLabel.intrinsicContentSize)
-//        
-//        NSLayoutConstraint.activate(
-//            [agreeButton.heightAnchor.constraint(equalToConstant: 60)])
-        
+            titleLabel.text = model.title
+            subTitleLabel.text = model.subTitle
+            
+            agreeButton.isHidden = model.agree == nil
+            cancelButton.isHidden = model.cancel == nil
+            titleLabel.isHidden = model.title == nil
+            subTitleLabel.isHidden = model.subTitle == nil
+        }
     }
     
     
     @objc func clickAgree() {
-        SurveyPoster().post()
+        SurveyPoster.post()
     }
     
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-extension String {
-    static func returnPriceString(with price: Int) -> String {
+extension Int {
+    func returnPriceString() -> String {
         let numberFormmater = NumberFormatter()
         numberFormmater.numberStyle = .decimal
-        guard let priceStr = numberFormmater.string(from: NSNumber(value: price)) else { return ""}
+        guard let priceStr = numberFormmater.string(from: NSNumber(value: self)) else { return ""}
         return priceStr
     }
 }

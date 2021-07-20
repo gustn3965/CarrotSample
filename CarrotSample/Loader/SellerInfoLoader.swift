@@ -17,6 +17,8 @@ class SellerInfoLoader {
         }
     }
     
+    var indexPath: IndexPath?
+    
     var completion: ((SellerModel?) -> Void)?
     var isError = false
     
@@ -41,7 +43,6 @@ class SellerInfoLoader {
             let sellerModel = createMockSeller()
             sellerModel.thumbnail = loadedImage
             self?.sellerInfo = sellerModel
-            
         })
         dataTask?.resume()
     }

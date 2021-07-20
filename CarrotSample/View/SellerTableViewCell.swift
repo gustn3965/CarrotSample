@@ -9,7 +9,7 @@ import UIKit
 
 class SellerTableViewCell: UITableViewCell {
     
-    private var sellerView: SellerView = SellerView()
+    var sellerView: SellerView = SellerView()
     var indexPath: IndexPath?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -22,7 +22,7 @@ class SellerTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        updateSellerView(with: nil)
+        updateSellerView(by: nil)
     }
     
     private func loadSellerView(with identifier: String?)  {
@@ -36,10 +36,10 @@ class SellerTableViewCell: UITableViewCell {
              sellerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
              sellerView.topAnchor.constraint(equalTo: contentView.topAnchor),
              sellerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
-        updateSellerView(with: nil)
+        updateSellerView(by: nil)
     }
     
-    func updateSellerView(with seller: SellerModel?) {
-        sellerView.updateSellerView(with: seller)
+    func updateSellerView(by seller: SellerModel?) {
+        sellerView.updateView(by: seller)
     }
 }

@@ -11,29 +11,21 @@ class StateLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
+        setUpView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setUp()
+        setUpView()
     }
     
-    private func setUp() {
+    private func setUpView() {
         textColor = .white
-        makeLayerRound()
-    }
-    
-    func setBackground(with state: SellerModel.State) {
-        backgroundColor = state.color
-    }
-    
-    func setText(with state: SellerModel.State) {
-        text = state.text
-    }
-    
-    func makeLayerRound() {
         setRoundCorner(to: 5.0)
     }
-  
+    
+    func updateView(by state: SellerModel.State) {
+        backgroundColor = state.color
+        text = state.text
+    }
 }

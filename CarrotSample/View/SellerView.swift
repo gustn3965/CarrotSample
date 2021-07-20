@@ -47,46 +47,41 @@ class SellerView: UIView {
         guard let view = nib.instantiate(withOwner: self).first as? UIView else { return }
         view.frame = bounds
         addSubview(view)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate(
-//        [view.leadingAnchor.constraint(equalTo: leadingAnchor),
-//         view.trailingAnchor.constraint(equalTo: trailingAnchor),
-//         view.topAnchor.constraint(equalTo: topAnchor),
-//         view.bottomAnchor.constraint(equalTo: bottomAnchor)])
-//       
     }
     
     private func makeRoundCorner() {
         imageImageView.setRoundCorner(to: 10.0)
     }
     
-    func updateSellerView(with seller: SellerModel?) {
-        guard let seller = seller else {
-            titleLabel.text = nil
-            priceLabel.text = nil
-            locationLabel.text = nil
-            imageImageView.image = nil
-            stateLabel.isHidden = true
-            likeCountLabel.isHidden = true
-            messageCountLabel.isHidden = true
-            setSoldView(isSold: false)
-            indicatorView.startAnimating()
-            indicatorView.isHidden = false
-            return }
-        indicatorView.stopAnimating()
-        imageImageView.image = seller.thumbnail
-        indicatorView.isHidden = true 
-        titleLabel.text = seller.title
-        priceLabel.text = String.returnPriceString(with: seller.price) + "원"
-        locationLabel.text = seller.location
-        stateLabel.isHidden = seller.state.color == nil ? true : false
-        stateLabel.setBackground(with: seller.state)
-        stateLabel.setText(with: seller.state)
-        likeCountLabel.isHidden = seller.likeCount == 0
-        messageCountLabel.isHidden = seller.messageCount == 0
-        likeCountLabel.text = "♡ \(seller.likeCount)"
-        messageCountLabel.text = "✉️ \(seller.messageCount)"
-        setSoldView(isSold: seller.state == .sold )
+    func updateView(by seller: SellerModel?) {
+        DispatchQueue.mainAsync { [self] in 
+            guard let seller = seller else {
+                titleLabel.text = nil
+                priceLabel.text = nil
+                locationLabel.text = nil
+                imageImageView.image = nil
+                stateLabel.isHidden = true
+                likeCountLabel.isHidden = true
+                messageCountLabel.isHidden = true
+                setSoldView(isSold: false)
+                indicatorView.startAnimating()
+                indicatorView.isHidden = false
+                return }
+            indicatorView.stopAnimating()
+            imageImageView.image = seller.thumbnail
+            indicatorView.isHidden = true
+            titleLabel.text = seller.title
+            priceLabel.text = seller.price.returnPriceString() + "원"
+            locationLabel.text = seller.location
+            stateLabel.isHidden = seller.state.color == nil ? true : false
+            stateLabel.updateView(by: seller.state)
+            likeCountLabel.isHidden = seller.likeCount == 0
+            messageCountLabel.isHidden = seller.messageCount == 0
+            likeCountLabel.text = "♡ \(seller.likeCount)"
+            messageCountLabel.text = "✉️ \(seller.messageCount)"
+            setSoldView(isSold: seller.state == .sold )
+        }
+        
     }
     
     private func setSoldView( isSold: Bool ) {

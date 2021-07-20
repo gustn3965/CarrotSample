@@ -46,7 +46,7 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JHB-9J-rLG">
                                     <rect key="frame" x="0.0" y="0.0" width="244" height="37.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="판매하고자하는 제목이 들어갑니다" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJd-73-fkn" userLabel="titleLabel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="판매하고자하는 제목이 들어갑니다" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJd-73-fkn" userLabel="titleLabel">
                                             <rect key="frame" x="0.0" y="0.0" width="244" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,7 +113,7 @@
                         </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="5Ca-go-a9e" firstAttribute="top" secondItem="jdg-Jj-QmC" secondAttribute="top" id="H68-Et-aud"/>
+                        <constraint firstItem="5Ca-go-a9e" firstAttribute="top" secondItem="jdg-Jj-QmC" secondAttribute="top" id="gZo-Uw-8M0"/>
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zJg-WN-kiL" userLabel="sold">
