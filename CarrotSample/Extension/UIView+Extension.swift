@@ -12,6 +12,5 @@ extension UIView {
     func setRoundCorner(to value: CGFloat) {
         layer.cornerRadius = value
         clipsToBounds = true
-    
     }
 }

@@ -16,6 +16,7 @@ class LocationListView: UIView {
     var actionList = [#selector(clickList1), #selector(clickList2), #selector(clickList3)]
     var locationList: [String] = Array(repeating: "", count: 3)
     
+    //MARK: - init
     convenience init(list: [String]) {
         self.init(frame: .zero)
         
@@ -34,6 +35,7 @@ class LocationListView: UIView {
         super.init(coder: coder)
     }
     
+    //MARK: - setUpView
     private func setUpView() {
         listView.axis = .vertical
         listView.backgroundColor = .white
@@ -61,7 +63,6 @@ class LocationListView: UIView {
             }
         }
         
-        
         addSubview(listView)
         listView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(
@@ -73,6 +74,7 @@ class LocationListView: UIView {
         listView.setRoundCorner(to: 7.0)
     }
     
+    //MARK: - Action
     @objc func clickList1() {
         postLocation(by: 0)
     }

@@ -12,6 +12,7 @@ class SellerTableViewCell: UITableViewCell {
     var sellerView: SellerView = SellerView()
     var indexPath: IndexPath?
     
+    //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         loadSellerView(with: reuseIdentifier)
@@ -21,12 +22,13 @@ class SellerTableViewCell: UITableViewCell {
         loadSellerView(with: nil)
     }
     
+    //MARK: - setUpView
     override func prepareForReuse() {
         updateSellerView(by: nil)
     }
     
     private func loadSellerView(with identifier: String?)  {
-        change(sellerView, Type: SellerViewType(rawValue: identifier))
+        sellerView.change(Type: SellerViewType(rawValue: identifier))
         
         contentView.addSubview(sellerView)
         sellerView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +41,7 @@ class SellerTableViewCell: UITableViewCell {
         updateSellerView(by: nil)
     }
     
+    //MARK: - 
     func updateSellerView(by seller: SellerModel?) {
         sellerView.updateView(by: seller)
     }

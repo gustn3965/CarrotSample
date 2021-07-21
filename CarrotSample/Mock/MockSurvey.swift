@@ -16,20 +16,11 @@ func createRandomSurvey() -> TopAlertModel{
     let agreeList = ["그럼요!", "그럼요!", "초대하기", "무조건 되고싶어요"]
     
     let idx = (0..<titleList.count).randomElement()!
-    return TopAlertModel(title: titleList[2],
+    return TopAlertModel(title: titleList[idx],
                        subTitle: nil,
-                       cancel: cancelList[2],
-                       agree: agreeList[2])
+                       cancel: cancelList[idx],
+                       agree: agreeList[idx])
 }
 
 
-func createRandomLocationCertification(name: String, with population: Int) -> TopAlertModel {
-    let title = "따뜻한 거래를 시작해보세요!"
-    let subTitle = "지금 동네인증을 하고 \(name) 근처 이웃 \(population.returnPriceString())명과 거래하세요."
-    let cancel: String? = nil
-    let agree: String = "동네인증하고 시작하기"
-    return TopAlertModel(title: title,
-                       subTitle: subTitle,
-                       cancel: cancel,
-                       agree: agree)
-}
+

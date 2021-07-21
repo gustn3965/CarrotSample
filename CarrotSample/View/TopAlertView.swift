@@ -18,6 +18,7 @@ class TopAlertView: UIView {
     var titleLabelHeightConstraint: NSLayoutConstraint!
     var isFinsihLoad = false
     
+    //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadView()
@@ -29,6 +30,7 @@ class TopAlertView: UIView {
         setUpView()
     }
     
+    //MARK: - setUpView
     private func loadView() {
         let bundle = Bundle(for: TopAlertView.self)
         let nib = UINib(nibName: "TopAlertView", bundle: bundle)
@@ -60,6 +62,7 @@ class TopAlertView: UIView {
         stackView.setRoundCorner(to: 7.0)
     }
     
+    // MARK: -
     func updateView(by model: TopAlertModel) {
         isFinsihLoad = true
         
@@ -76,9 +79,8 @@ class TopAlertView: UIView {
         }
     }
     
-    
+    // MARK: - Action 
     @objc func clickAgree() {
         SurveyPoster.post()
     }
-    
 }

@@ -11,6 +11,7 @@ class TopAlertTableViewCell: UITableViewCell {
     
     private var topAlertView: TopAlertView = TopAlertView()
     
+    //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         loadSurveyView()
@@ -21,6 +22,7 @@ class TopAlertTableViewCell: UITableViewCell {
         loadSurveyView()
     }
     
+    //MARK: - setUpView
     private func loadSurveyView()  {
         contentView.addSubview(topAlertView)
         topAlertView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,8 +33,8 @@ class TopAlertTableViewCell: UITableViewCell {
              topAlertView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
     }
     
+    //MARK: - 
     func updateTopAlertView(by model: TopAlertModel) {
             topAlertView.updateView(by: model)
-        
     }
 }

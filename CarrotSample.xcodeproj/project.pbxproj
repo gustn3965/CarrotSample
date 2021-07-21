@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1A869826A7EA6700E34E43 /* MockLocationCertification.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1A869726A7EA6700E34E43 /* MockLocationCertification.swift */; };
 		DB45AC522695CD6100D7AC61 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB45AC512695CD6100D7AC61 /* Int+Extension.swift */; };
 		DB7ACAEF26A54F0900D048F8 /* DispatchQueue+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACAEE26A54F0900D048F8 /* DispatchQueue+Extension.swift */; };
 		DB7ACB1126A58EF300D048F8 /* LocationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7ACB1026A58EF300D048F8 /* LocationButtonView.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DB1A869726A7EA6700E34E43 /* MockLocationCertification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationCertification.swift; sourceTree = "<group>"; };
 		DB45AC512695CD6100D7AC61 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		DB7ACAEE26A54F0900D048F8 /* DispatchQueue+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extension.swift"; sourceTree = "<group>"; };
 		DB7ACB1026A58EF300D048F8 /* LocationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButtonView.swift; sourceTree = "<group>"; };
@@ -111,7 +113,7 @@
 		DBB8D677269484D70000A088 /* CarrotSample */ = {
 			isa = PBXGroup;
 			children = (
-				DBB8D69C26949A900000A088 /* Util */,
+				DBB8D69C26949A900000A088 /* Mock */,
 				DB45AC502695CD5800D7AC61 /* Extension */,
 				DBC8830D269DB75E000C24FD /* Loader */,
 				DBB8D69926949A6D0000A088 /* Model */,
@@ -164,18 +166,19 @@
 			children = (
 				DBB8D69A26949A730000A088 /* SellerModel.swift */,
 				DBDE485026A196B700CF5BEB /* TopAlertModel.swift */,
+				DBDE484126A178F900CF5BEB /* SellerViewType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DBB8D69C26949A900000A088 /* Util */ = {
+		DBB8D69C26949A900000A088 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
 				DBB8D69D26949AA60000A088 /* MockSeller.swift */,
 				DBDE484E26A1959100CF5BEB /* MockSurvey.swift */,
-				DBDE484126A178F900CF5BEB /* SellerViewType.swift */,
+				DB1A869726A7EA6700E34E43 /* MockLocationCertification.swift */,
 			);
-			path = Util;
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		DBC8830D269DB75E000C24FD /* Loader */ = {
@@ -278,6 +281,7 @@
 				DB7ACB1826A5BE0A00D048F8 /* PopulationLoader.swift in Sources */,
 				DBDE484226A178F900CF5BEB /* SellerViewType.swift in Sources */,
 				DB7ACB1526A59E3100D048F8 /* LocationListLoader.swift in Sources */,
+				DB1A869826A7EA6700E34E43 /* MockLocationCertification.swift in Sources */,
 				DBDE485126A196B700CF5BEB /* TopAlertModel.swift in Sources */,
 				DBDE484826A18DA400CF5BEB /* TopAlertView.swift in Sources */,
 				DBB8D69026948CC40000A088 /* StateLabel.swift in Sources */,

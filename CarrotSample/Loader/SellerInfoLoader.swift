@@ -8,6 +8,7 @@
 import Foundation
 import UIKit.UIImage
 
+/// 판매자의 정보를 비동기적으로 가져오는 객체
 class SellerInfoLoader {
     
     var dataTask: URLSessionDataTask?

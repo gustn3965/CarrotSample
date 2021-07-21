@@ -8,6 +8,7 @@
 import UIKit
 
 class SellerListViewController: UIViewController {
+
     let divideView: UIView = UIView()
     let tableView: UITableView = UITableView()
     lazy var locationButtonView: LocationButtonView = LocationButtonView()
@@ -27,24 +28,24 @@ class SellerListViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         sellerType = SellerViewType.sellerCell
-        
         super.init(coder: coder)
     }
     
-    // MARK: - method
+    // MARK: - 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDivideView()
         setUpTableView()
         setUpNavigationBar()
         setUpRefreshControl()
-        setUpSurveyRequest()
+        setUpTopAlertView()
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveSurveyPost(notification:)), name: .surveyPost(), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didReceiveLocationPost(notification:)), name: .locationPost(), object: nil)
         
     }
     
-    func setUpSurveyRequest() {
+    //MARK: - setUpView
+    func setUpTopAlertView() {
         switch sellerType {
         case .notificationCell:
             isNeededTopAlertView = false
@@ -58,7 +59,6 @@ class SellerListViewController: UIViewController {
         }
     }
     
-    //MARK: - setUpView
     func setUpDivideView() {
         view.addSubview(divideView)
         let safeLayout = view.safeAreaLayoutGuide
@@ -145,7 +145,7 @@ class SellerListViewController: UIViewController {
     
     func refreshAllData() {
         refreshSllerInfoLoaders()
-        setUpSurveyRequest()
+        setUpTopAlertView()
         tableView.refreshControl?.endRefreshing()
     }
     

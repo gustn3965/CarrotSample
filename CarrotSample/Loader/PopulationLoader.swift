@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// 특정지역 인구수 가져오는 객체
+/// 특정지역 인구수를 비동기적으로 가져오는 객체
 struct PopulationLoader {
     
     static func load(_ completion: @escaping (Int) -> Void) {

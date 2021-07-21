@@ -22,6 +22,7 @@ class LocationButtonView: UIView {
     lazy var locationListView: LocationListView = LocationListView()
     lazy var alphaView: UIView = UIView()
     
+    //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -32,6 +33,7 @@ class LocationButtonView: UIView {
         super.init(coder: coder)
     }
     
+    //MARK: - setUpView
     private func setUpView() {
         locationLabel.text = "산본동"
         locationLabel.font = UIFont.systemFont(ofSize: 19, weight: .bold)
@@ -64,6 +66,7 @@ class LocationButtonView: UIView {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTouch)))
     }
     
+    //MARK: - Action
     @objc func didTouch() {
         UIView.animate(withDuration: 0.3) {
             self.arrowLabel.transform =  CGAffineTransform(rotationAngle: .pi)
