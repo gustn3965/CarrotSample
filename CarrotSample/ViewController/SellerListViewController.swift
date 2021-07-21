@@ -225,7 +225,6 @@ extension SellerListViewController: UITableViewDataSource {
             let sellerLoader = sellerInfoLoaders[indexPath.row]
             
             if let seller = sellerLoader.sellerInfo {
-                //
                 DispatchQueue.mainAsync {
                     cell.updateSellerView(by: seller)
                 }
